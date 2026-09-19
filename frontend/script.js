@@ -14,7 +14,7 @@ feedbackForm.addEventListener("submit", async (event) => {
     };
 
     try {
-        const response = await fetch("http://localhost:5000/feedback", {
+        const response = await fetch("https://student-feedback-generator-1.onrender.com/feedback", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

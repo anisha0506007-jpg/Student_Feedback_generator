@@ -1,7 +1,7 @@
 async function getFeedback() {
   try {
-    const response = await fetch("http://localhost:5000/feedback");
-    const feedbacks = await response.json();
+const response = await fetch("https://student-feedback-generator-1.onrender.com/feedback");    
+const feedbacks = await response.json();
     console.log(feedbacks)
     const feedbackList = document.getElementById("feedbackList");
     feedbackList.innerHTML = "";
@@ -37,7 +37,7 @@ async function getFeedback() {
 async function deleteFeedback(id) {
   try {
     const response = await fetch(
-      `http://localhost:5000/feedback/${id}`,
+      `https://student-feedback-generator-1.onrender.com/feedback/${id}`,
       {
         method: "DELETE"
       }
@@ -55,7 +55,7 @@ async function editFeedback(id, oldName, oldRating, oldComments) {
   const comments = prompt("Enter new comment:", oldComments);
   try {
     const response = await fetch(
-      `http://localhost:5000/feedback/${id}`,
+      `https://student-feedback-generator-1.onrender.com/feedback/${id}`,
       {
         method: "PUT",
         headers: {
