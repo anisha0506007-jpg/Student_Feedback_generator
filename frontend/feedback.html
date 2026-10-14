@@ -1,18 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>All Feedback</title>
-
+  <meta name="theme-color" content="#f7f7fc">
+  <title>All Feedback | StudentVoice</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <h1>All Student Feedback</h1>
-  <div id="feedbackList"></div>
-  <a href="index.html">Back to Feedback Form</a>
+
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">S</span>
+      <span>Student<span class="brand-light">Voice</span></span>
+    </a>
+
+    <nav>
+      <a href="index.html" class="nav-link">Give Feedback</a>
+      <a href="feedback.html" class="nav-link active">All Feedback</a>
+
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme">
+        <span id="themeIcon">☾</span>
+        <span id="themeLabel">Dark mode</span>
+      </button>
+
+    </nav>
+
+    <span class="nav-status">
+      <span class="status-dot"></span>
+      Feedback Portal
+    </span>
+  </header>
+
+  <main class="page-container feedback-page">
+
+    <section class="feedback-hero">
+      <div>
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          STUDENT COMMUNITY
+        </span>
+
+        <h1>Every voice.<br><span class="gradient-text">A better experience.</span></h1>
+
+        <p class="welcome-description">
+          Discover what students are saying. Every piece of feedback is
+          an opportunity to learn, improve, and grow together.
+        </p>
+
+        <a href="index.html" class="primary-button inline-button">
+          <span>+ Share your feedback</span>
+          <span class="button-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="feedback-hero-art">
+        <div class="feedback-art-circle circle-one"></div>
+        <div class="feedback-art-circle circle-two"></div>
+        <div class="feedback-art-content">
+          <span class="art-sparkle">✦</span>
+          <span class="art-quote">“</span>
+          <h3>Listen.<br>Learn.<br>Improve.</h3>
+          <div class="art-line"></div>
+          <p>Better experiences start with honest feedback.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feedback-section">
+      <div class="feedback-section-heading">
+        <div>
+          <span class="section-kicker">COMMUNITY VOICES</span>
+          <h2>Student feedback</h2>
+          <p>Read the experiences and suggestions shared by students.</p>
+        </div>
+
+        <a href="index.html" class="text-link">Give feedback <span>→</span></a>
+      </div>
+
+      <div class="feedback-toolbar">
+        <div class="toolbar-label">
+          <span class="toolbar-dot"></span>
+          All submissions
+        </div>
+        <span class="live-label"><span class="status-dot"></span> Connected to feedback service</span>
+      </div>
+
+      <div id="feedbackList" class="feedback-grid" aria-live="polite">
+        <div class="loading-card">
+          <span class="loading-spinner"></span>
+          <p>Loading student feedback...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-banner">
+      <div class="banner-icon">✦</div>
+      <div>
+        <h3>Your experience matters, too.</h3>
+        <p>Help us make the learning experience even better.</p>
+      </div>
+      <a href="index.html" class="secondary-button">Share feedback <span>→</span></a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html" class="footer-brand">StudentVoice</a>
+    <p>Built for better learning experiences.</p>
+    <span>© <span id="currentYear"></span> Student Feedback Manager</span>
+  </footer>
+
   <script src="feedback.js"></script>
+  <script src="theme.js"></script>
+
 </body>
+
 </html>

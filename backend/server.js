@@ -48,7 +48,7 @@ app.post("/feedback",async(req,res)=>{
 
 app.get("/feedback",async(req,res)=>{
     try{
-        const feedbacks=await Feedback.find();
+        const feedbacks= await Feedback.find();
 
         res.status(200).json(feedbacks)
     }catch(error){

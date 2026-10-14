@@ -1,35 +1,88 @@
+
+const API_URL = "https://student-feedback-generator-1.onrender.com/feedback";
+
 const feedbackForm = document.getElementById("feedbackForm");
+const message = document.getElementById("message");
+const submitButton = document.getElementById("submitButton");
+const commentsInput = document.getElementById("comments");
+const charCount = document.getElementById("charCount");
+
+document.getElementById("currentYear").textContent =
+  new Date().getFullYear();
+
+// Live comment character counter
+commentsInput.addEventListener("input", () => {
+  charCount.textContent = commentsInput.value.length;
+});
 
 feedbackForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const rating = document.getElementById("rating").value;
-    const comments = document.getElementById("comments").value;
+  const name = document.getElementById("name").value.trim();
+  const rating = document.getElementById("rating").value;
+  const comments = commentsInput.value.trim();
 
-    const feedbackData = {
-        name: name,
-        rating: Number(rating),
-        comments: comments
-    };
+  if (!name || !rating || !comments) {
+    showMessage("Please fill in all the fields.", "error");
+    return;
+  }
 
-    try {
-        const response = await fetch("https://student-feedback-generator-1.onrender.com/feedback", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(feedbackData)
-        });
+  if (Number(rating) < 1 || Number(rating) > 5) {
+    showMessage("Please select a rating between 1 and 5.", "error");
+    return;
+  }
 
-        const data = await response.json();
+  const feedbackData = {
+    name,
+    rating: Number(rating),
+    comments
+  };
 
-        document.getElementById("message").textContent = data.message;
+  submitButton.disabled = true;
+  submitButton.querySelector("span:first-child").textContent =
+    "Submitting...";
+  message.textContent = "";
+  message.className = "form-message";
 
-    } catch (error) {
-        console.log(error);
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(feedbackData)
+    });
 
-        document.getElementById("message").textContent =
-            "Something went wrong";
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Unable to submit feedback.");
     }
+
+    showMessage(
+      data.message || "Thank you! Your feedback was submitted successfully.",
+      "success"
+    );
+
+    feedbackForm.reset();
+    charCount.textContent = "0";
+
+  } catch (error) {
+    console.error("Error submitting feedback:", error);
+
+    showMessage(
+      error.message || "Something went wrong. Please try again.",
+      "error"
+    );
+  } finally {
+    submitButton.disabled = false;
+    submitButton.querySelector("span:first-child").textContent =
+      "Submit Feedback";
+  }
 });
+
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = `form-message ${type}`;
+}
+
